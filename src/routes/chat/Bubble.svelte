@@ -1,0 +1,11 @@
+<script>
+  export let isMe = false
+
+  export let content = ''
+</script>
+
+<div class="chat chat-{isMe ? 'end' : 'start'}">
+	<div class="chat-bubble chat-bubble-{isMe ? 'secondary' : 'primary'} shadow-md">
+		{content}
+	</div>
+</div>

@@ -12,7 +12,8 @@ export default {
           "primary": "#ffe4f7",
           "secondary": "#9b89ff",
         }
-      }
+      },
+      "cupcake"
     ]
   }
 }

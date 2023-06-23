@@ -8,11 +8,7 @@
 </svelte:head>
 
 <section>
-	<Hero
-		buttonLabel="Get Started"
-		description="Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi."
-		title='Hello there'
-	/>
+	<Hero />
 </section>
 
 <style lang="postcss">

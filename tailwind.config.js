@@ -6,7 +6,14 @@ export default {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["cupcake", "forest"]
+    themes: [
+      {
+        myTheme: {
+          "primary": "#ffe4f7",
+          "secondary": "#9b89ff",
+        }
+      }
+    ]
   }
 }
 

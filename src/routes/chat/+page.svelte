@@ -1,32 +1,63 @@
 <script lang="ts">
   import Bubble from "./Bubble.svelte";
+  import type {Chat} from "./types";
+  import {pause} from "./util";
+  import {afterUpdate, beforeUpdate} from "svelte";
 
-  let chats = []
-
+  let chats: Chat[] = []
   let chatWrapper
+  let loading = false
+  let autoscroll = false
 
-  let loading = false;
+  beforeUpdate(() => {
+    if (chatWrapper) {
+      const scrollableDistance = chatWrapper.scrollHeight - chatWrapper.offsetHeight;
+      autoscroll = chatWrapper.scrollTop > scrollableDistance - 20;
+    }
+  });
 
+  afterUpdate(() => {
+    if (autoscroll) {
+      chatWrapper.scrollTo(0, chatWrapper.scrollHeight);
+    }
+  });
 
+  async function handleKeydown(event) {
+    if (event.key === 'Enter' && event.target.value) {
+      const reply: Chat = {
+        id: 10,
+        sender: 'me',
+        groupId: 10,
+        beforeId: 10,
+        content: event.target.value
+      }
+
+      event.target.value = '';
+
+      chats = [...chats, reply];
+      await pause(200 * (1 + Math.random()));
+
+      loading = true;
+
+      await pause(700 * (1 + Math.random()));
+
+      loading = false;
+    }
+  }
 </script>
 
-<div
-	bind:this={chatWrapper}
-	class="container mx-auto min-h-screen flex flex-col justify-end gap-2 p-4 chatWrapper"
->
-	{#each chats as chat}
-		<Bubble isRight={chat.sender === 'me'} content={chat.content} />
-	{/each}
-	{#if loading}
-		<span class="loading loading-dots loading-md my-1 ml-2"></span>
-	{/if}
+<div class="container mx-auto h-screen flex flex-col-reverse">
+	<div
+		bind:this={chatWrapper}
+		class="flex flex-col p-4 scroll-smooth overflow-y-auto"
+	>
+		{#each chats as chat}
+			<Bubble isMe={chat.sender === 'me'} content={chat.content} />
+		{/each}
+		{#if loading}
+			<span class="loading loading-dots loading-md my-1 ml-2"></span>
+		{/if}
+		<input class="absolute bottom-0" on:keydown={handleKeydown} />
+	</div>
 </div>
 
-
-<style>
-	@media (prefers-reduced-motion) {
-		.chatWrapper {
-			scroll-behavior: auto;
-		}
-	}
-</style>

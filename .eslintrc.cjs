@@ -28,6 +28,7 @@ module.exports = {
       rules: {
         "no-trailing-spaces": "error",
         "eol-last": "error",
+        "svelte/no-at-html-tags": "off"
       }
     }
   ]

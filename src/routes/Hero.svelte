@@ -6,7 +6,7 @@
 			<h1 class="mb-5 text-5xl">
 				Welcome to
 				<br />
-				<strong>We Koreans Now Do this</strong>
+				<strong>What Koreans Really Do</strong>
 			</h1>
 			<p class="mb-6">
 				Do you feel it's difficult to know the real Koreans' latest trend?

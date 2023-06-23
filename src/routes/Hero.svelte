@@ -14,7 +14,9 @@
 				<br />
 				You can get information from the media, but the trend is a year late.
 			</p>
-			<button class="btn btn-primary">Let's get started!</button>
+			<a href="/chat">
+				<button class="btn btn-primary">Let's get started!</button>
+			</a>
 		</div>
 	</div>
 </div>

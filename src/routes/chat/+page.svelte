@@ -3,13 +3,17 @@
 
   let chats = []
 
+  let chatWrapper
+
   let loading = false;
 
 
 </script>
 
-<div class="container mx-auto min-h-screen flex flex-col justify-end gap-2 p-4 chatWrapper
-">
+<div
+	bind:this={chatWrapper}
+	class="container mx-auto min-h-screen flex flex-col justify-end gap-2 p-4 chatWrapper"
+>
 	{#each chats as chat}
 		<Bubble isRight={chat.sender === 'me'} content={chat.content} />
 	{/each}

@@ -1,43 +1,65 @@
 <script lang="ts">
-  import Bubble from "./bubble/Message.svelte";
-  import type {Chat} from "./types";
+  import Message from "./Bubble.svelte";
+  import type {ButtonType, MessageType} from "./types";
   import {pause} from "./util";
   import Container from "./Container.svelte";
 
-  let chats: Chat[] = []
+  let chats: MessageType[] = []
+  let buttons: ButtonType[] = []
   let loading = false
 
+  const handleButtonClick = (selected: ButtonType,) => {
+    console.log(selected,)
+  }
 
-  async function handleKeydown(event) {
+  // TODO 배포시 삭제
+  async function handleKeydown(event,) {
     if (event.key === 'Enter' && event.target.value) {
-      const reply: Chat = {
+      const reply: MessageType = {
         id: 10,
         sender: 'me',
         groupId: 10,
         beforeId: 10,
-        content: event.target.value
+        content: event.target.value,
       }
 
       event.target.value = '';
 
       chats = [...chats, reply];
-      await pause(200 * (1 + Math.random()));
+      await pause(200 * (1 + Math.random()),);
 
       loading = true;
 
-      await pause(700 * (1 + Math.random()));
+      await pause(700 * (1 + Math.random()),);
 
       loading = false;
+
+      buttons = [...buttons, {
+        id: 0,
+        groupId: 0,
+        beforeId: 0,
+        content: 'Nice to meet you, too.',
+      },]
     }
   }
 </script>
 
 <Container>
 	{#each chats as chat}
-		<Bubble isMe={chat.sender === 'me'} content={chat.content} />
+		<Message isMe={chat.sender === 'me'}>{chat.content}</Message>
 	{/each}
 	{#if loading}
 		<span class="loading loading-dots loading-md my-1 ml-2"></span>
 	{/if}
+	{#each buttons as button}
+		<div class="my-3">
+			<button
+				class="btn btn-outline btn-sm btn-block"
+				on:click={() => handleButtonClick(button,)}
+			>
+				{button.content}
+			</button>
+		</div>
+	{/each}
 	<input class="absolute bottom-0" on:keydown={handleKeydown} />
 </Container>

@@ -1,7 +1,15 @@
 export type Chat = {
-  id: number,
-  sender?: 'me' | 'you',
-  groupId: number, // 같은 묶음으로 나오는 id
-  beforeId: number, // 이전 채팅의 id
-  content: string,
+  id: number
 }
+
+export type MessageType = {
+  type?: 'message' | 'card'
+  afterId: number
+  afterType: 'button' | 'message' | 'card' | 'input'
+  sender: 'me' | 'you'
+  content: string | HTMLDivElement
+} & Chat
+
+export type ButtonType = {
+  chatIds: number[]
+} & Chat

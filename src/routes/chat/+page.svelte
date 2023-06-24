@@ -112,7 +112,7 @@
 			{#each buttons as button}
 				<div class="my-2">
 					<button
-						class="btn btn-outline btn-sm btn-block h-auto"
+						class="btn btn-outline btn-sm btn-block h-auto py-1"
 						on:click={() => handleButtonClick(button)}
 					>
 						{button.content}

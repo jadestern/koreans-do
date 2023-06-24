@@ -5,7 +5,7 @@
 </script>
 
 <div class="chat chat-{isMe ? 'end' : 'start'}">
-	<div class="chat-bubble chat-bubble-{isMe ? 'secondary' : 'primary'} shadow-md">
+	<div class="chat-bubble bg-{isMe ? 'primary' : 'base-200'} text-{isMe ? 'base-100' : 'blue-800'} shadow-md">
 		{@html content}
 	</div>
 </div>

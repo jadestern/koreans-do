@@ -42,7 +42,7 @@ export const YOU_CHATS: MessageType[] = [
     afterId: 10,
     afterType: 'message',
     sender: 'me',
-    content: 'Not right now',
+    content: 'Not right now.',
   },
   {
     id: 6,

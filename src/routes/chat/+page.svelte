@@ -17,7 +17,7 @@
   }
 
   const addChat = async (payload: MessageType) => {
-    await typing()
+    await typing(typeof payload.content === 'string' ? payload.content.length : 100)
     chats = [...chats, payload]
   }
 
@@ -49,14 +49,14 @@
     }
   }
 
-  const typing = async () => {
+  const typing = async (length?: number) => {
     loading = true;
-    await pause(700 * (1 + Math.random()));
+    await pause(30 * (length ?? 10 + Math.random()));
     loading = false;
   }
 
   onMount(async () => {
-    await typing()
+    await typing(30)
     chats = [...chats, head(YOU_CHATS) as MessageType]
   })
 

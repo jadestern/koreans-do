@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Message from "./Bubble.svelte";
+  import Message from "./message/Bubble.svelte";
   import type {MessageType} from "./types";
   import {onMount,} from "svelte";
   import {BUTTONS, YOU_CHATS} from "./constants";
@@ -112,7 +112,7 @@
 			{#each buttons as button}
 				<div class="my-2">
 					<button
-						class="btn btn-outline btn-sm btn-block h-auto py-1"
+						class="btn btn-outline btn-sm btn-block h-auto py-1 capitalize"
 						on:click={() => handleButtonClick(button)}
 					>
 						{button.content}

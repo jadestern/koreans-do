@@ -1,18 +1,19 @@
 <script lang="ts">
   import Message from "./Bubble.svelte";
-  import type {ButtonType, MessageType} from "./types";
-  import Container from "./Container.svelte";
+  import type {MessageType} from "./types";
   import {onMount,} from "svelte";
   import {BUTTONS, YOU_CHATS} from "./constants";
   import {find, flow, get, head, last, map} from 'lodash/fp'
   import {pause} from "./util";
+  import Container from "./Container.svelte";
 
   let chats: MessageType[] = []
-  let buttons: ButtonType[] = []
+  let buttons: MessageType[] = []
   let loading = false
 
-  const handleButtonClick = (selected: ButtonType) => {
-    console.log(selected)
+  const handleButtonClick = (selected: MessageType) => {
+    buttons = []
+    chats = [...chats, selected as MessageType]
   }
 
   const addChat = async (payload: MessageType) => {
@@ -92,13 +93,17 @@
 </script>
 
 <Container>
-	{#each chats as chat}
-		{#if typeof chat.content === 'string'}
-			<Message isMe={chat.sender === 'me'} content={chat.content} />
-		{:else}
-			hello
-		{/if}
-	{/each}
+	{#if !!chats.length}
+		<div class="flex flex-col gap-2">
+			{#each chats as chat}
+				{#if typeof chat.content === 'string'}
+					<Message isMe={chat.sender === 'me'} content={chat.content} />
+				{:else}
+					hello
+				{/if}
+			{/each}
+		</div>
+	{/if}
 	{#if loading}
 		<span class="loading loading-dots loading-md my-1 ml-2"></span>
 	{/if}
@@ -107,7 +112,7 @@
 			{#each buttons as button}
 				<div class="my-2">
 					<button
-						class="btn btn-outline btn-sm btn-block"
+						class="btn btn-outline btn-sm btn-block h-auto"
 						on:click={() => handleButtonClick(button)}
 					>
 						{button.content}
@@ -116,6 +121,5 @@
 			{/each}
 		</div>
 	{/if}
-
-	<!--	<input class="absolute bottom-0" on:keydown={handleKeydown} />-->
 </Container>
+<!--	<input class="absolute bottom-0" on:keydown={handleKeydown} />-->

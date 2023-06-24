@@ -18,11 +18,9 @@
   });
 </script>
 
-<div class="container mx-auto h-screen flex flex-col-reverse">
-	<div
-		bind:this={chatWrapper}
-		class="flex flex-col p-4 scroll-smooth overflow-y-auto"
-	>
-		<slot />
-	</div>
+<div
+	bind:this={chatWrapper}
+	class="h-screen flex flex-col justify-end p-3"
+>
+	<slot />
 </div>

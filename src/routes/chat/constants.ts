@@ -7,7 +7,7 @@ export const YOU_CHATS: MessageType[] = [
     afterType: 'button',
     sender: 'you',
     content:
-      "Hi. <strong>Welcome to We Koreans Now Do this.</strong><br />I'm Elisa, a native Korean living in Seoul right now. Nice to meet you.",
+      "Hi. <strong>Welcome to What Koreans Really Do this.</strong><br />I'm Elisa, a native Korean living in Seoul right now. Nice to meet you.",
   },
   {
     id: 1,

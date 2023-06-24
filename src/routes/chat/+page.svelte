@@ -89,6 +89,11 @@
     }
   }
 
+
+  export let data
+  
+  console.log('data', data)
+  
   // TODO
   let cards = []
 

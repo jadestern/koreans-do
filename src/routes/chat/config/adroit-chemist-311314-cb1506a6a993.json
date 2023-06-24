@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "adroit-chemist-311314",
+  "private_key_id": "cb1506a6a993ec48537332d4e7a27030e6491950",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCPb3voUULK5qXf\nqpWSGn51jskvOVbUn6jOLyf0icedsBTEXlzs6l+evWdIhpMqTAxmPGljH2ImrHNX\nGQ2HAaEIzvEqKUHLubepEdk9BvYu5qcLb73lIPUleBMtslJMULs5GcKEPMjmRJFH\nJnpQzI5oh13BKaOJ3k+aYEusgcXlR2jVRc/Ggt12q4Sga8BSddUC1AFMbxCPQK/W\nmAh3PndsR86JxpZiED4s3fa9QaS0zvuP1JJr1b/1GTovTefDiSzjROrroaGy/CdR\n3OJe0D3o34M7KiL7KrWc5m2VO+ds0ZYyxo919L3z4Y3Oh4Mtx0S/ybfVGAyd20sU\nG3dQOifdAgMBAAECggEACkVImVJGRtqcqocftipE/1x1zfacX9W94+OvB/zcqQ8s\ncYIzQ7ill6uGy4PtYkQ3SBPP1QvwfoXvLV+rHw1wDz4oOSVio3idLNNNG6hVtPaJ\npBFAhvlk7GWsc+N2rqXCPjy4t7jVht2GjJJ2BDadhOEahsQZRHxBdXOrP4M8XSY0\nIG2xN8r2oJlDxgbX+vvkvPpj9W+ZErULTe+8AA7QrhiRyXPVTtjUEVsEd6Q4OlPF\n8BObQQDXhEP4A+2KiNKBhiCojASmmmIavZ9Vas16oFOdgryAnwx3skacR5u//d0k\ncqV01+ufNa5mDifygrITV3DFNwfaSfyxOvKLoZ20MQKBgQDKp0nL4Uq1I62mEPZv\nVF06/hNoj5nvp5dSOHQuxC9FulbpXkhl0l7gVbzTEYORwo+VEKov22prexCASuvd\nSGLWAnMtf1TEx2n0DXzJyoo/b/KPz4aSPQImfXnsTnDA5ZFZsEaTiEUoOSsPMFeS\ncWYmWMcZcNTlHmu224SWfCRvbQKBgQC1MYbNP5289kW8Oyst88Bu3++qPqZua69r\nnIdUcI5+DzYyUba/A77KgxLNQF+cPPF4wK4tx2OYm0jSxgkDhPsIhTBZ7Hy511yf\niniPfuGGvaXyRPJxKvw8U5KbUDPDOTFojv9kMrk/RljXwNdoGhvqzwkFJtG1iIUT\nCKL1DvukMQKBgCVk2wQo7T0heUBkbuS6H33sNi6cGN6VASIl0qJyhvqJ2NG1GQzY\n1bL1fyM/XxS9Xvs1mQG9rhRpH/FcYctyOPKefxxNG5o35cAn4PfnTL1J7etFcuJ3\nKXdqvd2x17JwafKvyUYd5gz3B5AE7pPSIvQ+e3ahUFd61otmVD/kZmC9AoGAH76v\nmWId5q9XBGVxaTmda098k90qF4pyT247H4Yg0OElY6eBVvH3CU/xiVhP5/WdcMSB\nP7ABOQlrttHPXnh76sA6+mY+a+jZZ3JBMRLPvGWZn1qJB166lm8l7mQczYVFrMXw\n5MMmRXmzswksNCbu4TKop+hnMWDbv7vxoPGhEOECgYArCNa8ZxmZqzyN5dleuy4y\nfu0pkAxLQAE7Qx2qGR1IXw8Z597ZoXPuwu31OuFAOGIo53vipbZ/Ko8zNFzYKz+8\nSczefF9QUcnrhSinfLKc3XkvWultiJpOndKuLV5AGnFCXueQrOVgvAiZn6dzuJCF\nqVDbOrLsoQ6kO6aN6AKdfA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "google-sheet-api@adroit-chemist-311314.iam.gserviceaccount.com",
+  "client_id": "109491901484068944688",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/google-sheet-api%40adroit-chemist-311314.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

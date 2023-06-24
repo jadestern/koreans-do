@@ -1,9 +1,11 @@
 <script>
   export let isMe = false
+
+  export let content = ''
 </script>
 
-<div class="chat chat-{isMe ? 'end' : 'start'}">
+<div class="flex chat chat-{isMe ? 'end' : 'start'}">
 	<div class="chat-bubble chat-bubble-{isMe ? 'secondary' : 'primary'} shadow-md">
-		<slot />
+		{@html content}
 	</div>
 </div>

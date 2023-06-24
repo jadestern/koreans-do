@@ -2,7 +2,9 @@
 // @ts-ignore
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import creds from './config/adroit-chemist-311314-cb1506a6a993.json'
-import {map, flow} from 'lodash/fp'
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const _ = require('lodash/fp');
 
 export async function load() {
   // Initialize the sheet - doc ID is the long id in the sheets URL
@@ -13,7 +15,7 @@ export async function load() {
   const itemSheet = doc.sheetsByIndex[1]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
   const itemRows = await itemSheet.getRows()
 
-  const items = flow(map('_rawData'))(itemRows)
+  const items = _.flow(_.map('_rawData'))(itemRows)
 
   return {
     items: items,

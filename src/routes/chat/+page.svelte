@@ -4,12 +4,13 @@
   import { onMount, } from "svelte";
   import { BUTTONS, YOU_CHATS } from "./constants";
   import { find, flow, get, head, last, map } from 'lodash/fp'
-  import { pause } from "./util";
+  import { emailValidate, pause } from "./util";
   import Container from "./Container.svelte";
 
   let chats: MessageType[] = []
   let buttons: MessageType[] = []
   let loading = false
+  let hasInput = false
 
   const handleButtonClick = (selected: MessageType) => {
     buttons = []
@@ -46,6 +47,9 @@
           addChat
         )(YOU_CHATS)
         break;
+      case 'input':
+        hasInput = true
+				break;
     }
   }
 
@@ -60,10 +64,24 @@
     chats = [...chats, head(YOU_CHATS) as MessageType]
   })
 
-  // TODO input 넣을 때 주석 제거
+
+  let email = ''
+  const sendEmail = (content: string) => {
+    hasInput = false
+    chats = [...chats, {
+      id: 0,
+      afterId: emailValidate(content) ? 23 : 24,
+      afterType: 'message',
+      sender: 'me',
+      content,
+    }]
+  }
+
   async function handleKeydown(event) {
-    if (event.key === 'Enter' && event.target.value) {
-      console.log(event.target.value)
+    const value = event.target.value
+
+    if(event.key === 'Enter' && value) {
+      sendEmail(value)
     }
   }
 </script>
@@ -99,12 +117,20 @@
 		</div>
 	{/if}
 	</div>
-	<div>
-		<input
-			type="text"
-			class="input input-bordered input-primary w-full"
-			on:keydown={handleKeydown}
-		/>
-	</div>
+	{#if hasInput}
+		<div class="relative m-3">
+			<form>
+				<input
+					bind:value={email}
+					type="email"
+					placeholder="Type here"
+					class="input input-bordered w-full pr-16"
+					on:keydown={handleKeydown}
+					required
+				/>
+			</form>
+			<button class="btn btn-primary absolute top-0 right-0 rounded-l-none" on:click={() => sendEmail(email)}>Send</button>
+		</div>
+	{/if}
 <!--	<Card />-->
 </Container>

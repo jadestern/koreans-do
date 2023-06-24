@@ -4,8 +4,8 @@ export type Chat = {
 
 export type MessageType = {
   type?: 'message' | 'card'
-  afterId: number
-  afterType: 'button' | 'message' | 'card' | 'input'
+  afterId?: number
+  afterType?: 'button' | 'message' | 'card' | 'input'
   sender: 'me' | 'you'
   content: string | HTMLDivElement
 } & Chat

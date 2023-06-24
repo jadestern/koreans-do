@@ -171,6 +171,19 @@ I will send you the tips for this!`,
 I will send you the detailed information about this.
 You can get it in a day.`,
   },
+  {
+    id: 23,
+    sender: 'you',
+    content: `Thank you for your feedback!
+I will send you the detailed information about this.`,
+  },
+  {
+    id: 24,
+    afterId: -1,
+    afterType: 'input',
+    sender: 'you',
+    content: `Sorry. I don't understand your email. Could you type it again?`,
+  }
 ]
 export const BUTTONS: ButtonType[] = [
   {

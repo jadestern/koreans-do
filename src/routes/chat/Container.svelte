@@ -20,7 +20,7 @@
 
 <div
 	bind:this={chatWrapper}
-	class="w-screen h-screen flex flex-col justify-end p-3"
+	class="w-screen h-screen flex flex-col justify-end"
 >
 	<slot />
 </div>

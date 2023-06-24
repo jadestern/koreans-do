@@ -61,38 +61,15 @@
   })
 
   // TODO input 넣을 때 주석 제거
-  /*async function handleKeydown(event,) {
+  async function handleKeydown(event) {
     if (event.key === 'Enter' && event.target.value) {
-      const reply: MessageType = {
-        id: 10,
-        sender: 'me',
-        groupId: 10,
-        beforeId: 10,
-        content: event.target.value,
-      }
-
-      event.target.value = '';
-
-      chats = [...chats, reply];
-      await pause(200 * (1 + Math.random()),);
-
-      loading = true;
-
-      await pause(700 * (1 + Math.random()),);
-
-      loading = false;
-
-      buttons = [...buttons, {
-        id: 0,
-        groupId: 0,
-        beforeId: 0,
-        content: 'Nice to meet you, too.',
-      },]
+      console.log(event.target.value)
     }
-  }*/
+  }
 </script>
 
 <Container>
+	<div class="p-3">
 	{#if !!chats.length}
 		<div class="flex flex-col gap-2">
 			{#each chats as chat}
@@ -121,6 +98,13 @@
 			{/each}
 		</div>
 	{/if}
+	</div>
+	<div>
+		<input
+			type="text"
+			class="input input-bordered input-primary w-full"
+			on:keydown={handleKeydown}
+		/>
+	</div>
 <!--	<Card />-->
 </Container>
-<!--	<input class="absolute bottom-0" on:keydown={handleKeydown} />-->

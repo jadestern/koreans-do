@@ -150,7 +150,7 @@ what the real Korea is like right now.`,
   {
     id: 20,
     afterId: -1,
-    afterType: 'input', // TODO input 후에 대한 처리
+    afterType: 'input',
     sender: 'you',
     content: `Thank you! If you leave your e-mail address,
 I will send you the tips for this!`,

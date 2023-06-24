@@ -6,6 +6,7 @@
   import { find, flow, get, head, last, map } from 'lodash/fp'
   import { emailValidate, pause } from "./util";
   import Container from "./Container.svelte";
+  import Card from "./Card.svelte";
 
   let chats: MessageType[] = []
   let buttons: MessageType[] = []
@@ -50,6 +51,9 @@
       case 'input':
         hasInput = true
 				break;
+	    case 'card':
+        cards = [...cards, 1]
+		    break
     }
   }
 
@@ -84,6 +88,18 @@
       sendEmail(value)
     }
   }
+
+  // TODO
+  let cards = []
+
+  const handleCardClick = (value: string) => {
+	  console.log(value)
+	  // TODO
+	  // value 로 다시 카드 내용 바꾸기
+	  // category 랑 콘텐츠 분할
+	  // 선택하면 메시지 보내기
+
+  }
 </script>
 
 <Container>
@@ -116,6 +132,34 @@
 			{/each}
 		</div>
 	{/if}
+		{#if cards.length}
+			<div class="mt-4 carousel carousel-center max-w-md p-4 space-x-4 bg-neutral">
+				<div class="carousel-item">
+					<Card on:click={() => handleCardClick('value')} />
+				</div>
+				<div class="carousel-item">
+					<Card />
+				</div>
+				<div class="carousel-item">
+					<Card />
+				</div>
+				<div class="carousel-item">
+					<Card />
+				</div>
+				<div class="carousel-item">
+					<Card />
+				</div>
+				<div class="carousel-item">
+					<Card />
+				</div>
+				<div class="carousel-item">
+					<Card />
+				</div>
+				<div class="carousel-item">
+					<Card />
+				</div>
+			</div>
+		{/if}
 	</div>
 	{#if hasInput}
 		<div class="relative m-3">
@@ -132,5 +176,5 @@
 			<button class="btn btn-primary absolute top-0 right-0 rounded-l-none" on:click={() => sendEmail(email)}>Send</button>
 		</div>
 	{/if}
-<!--	<Card />-->
+
 </Container>

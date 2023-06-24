@@ -1,12 +1,11 @@
 <script lang="ts">
-  import Message from "./Bubble.svelte";
+  import Message from "./Message.svelte";
   import type { MessageType } from "./types";
   import { onMount, } from "svelte";
   import { BUTTONS, YOU_CHATS } from "./constants";
   import { find, flow, get, head, last, map } from 'lodash/fp'
   import { pause } from "./util";
   import Container from "./Container.svelte";
-  import Card from "./Card.svelte";
 
   let chats: MessageType[] = []
   let buttons: MessageType[] = []
@@ -122,6 +121,6 @@
 			{/each}
 		</div>
 	{/if}
-	<Card />
+<!--	<Card />-->
 </Container>
 <!--	<input class="absolute bottom-0" on:keydown={handleKeydown} />-->

@@ -46,7 +46,7 @@ export const YOU_CHATS: MessageType[] = [
   },
   {
     id: 6,
-    afterId: 13,
+    afterId: 12,
     afterType: 'message',
     sender: 'me',
     content: "No, I'm just looking around.",
@@ -81,7 +81,7 @@ export const YOU_CHATS: MessageType[] = [
   },
   {
     id: 11,
-    afterId: 12,
+    afterId: 9,
     afterType: 'message',
     sender: 'you',
     content: `I'm happy that someday you will experience the real Korea!
@@ -90,7 +90,7 @@ Please tell me what is the most difficult thing when you consider coming to Kore
   {
     id: 12,
     afterId: -1,
-    afterType: 'message',
+    afterType: 'input',
     sender: 'you',
     content: `Oh, great. If you leave your e-mail address,
 I will send you the latest trendy information about Korea!`,

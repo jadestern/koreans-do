@@ -106,11 +106,6 @@
     })]
   }
 
-  const handleThemeCardClick = async (category: string) => {
-    // Contents Card 보여주기
-
-  }
-
   const showContentCard = async () => {
     loading = true
     const lastChatContent = flow(last, get('content'))(chats)
@@ -121,7 +116,17 @@
         description: value[2],
         imageUrl: value[3],
         buttonLabel: 'Show me more',
-        onClick: () => console.log(value[5])
+        onClick: async () => {
+          window.open(value[4], "_blank");
+          await typing()
+          chats = [...chats, {
+            id: 21,
+            afterId: 22,
+            afterType: 'message',
+            sender: 'you',
+            content: `Excellent Choice!`,
+          }]
+        }
       }
     })).filter((content) => {
       return content.category === lastChatContent
@@ -157,53 +162,51 @@
 </script>
 
 <Container>
-	<div>
-		<div class="p-3">
-			{#if !!chats.length}
-				<div class="flex flex-col gap-2">
-					{#each chats as chat}
-						{#if typeof chat.content === 'string'}
-							<Message isMe={chat.sender === 'me'} content={chat.content} />
-						{:else}
-							hello
-						{/if}
-					{/each}
-				</div>
-			{/if}
-			{#if loading}
-				<span class="loading loading-dots loading-md my-1 ml-2"></span>
-			{/if}
-			{#if !!buttons.length}
-				<div class="mt-3">
-					{#each buttons as button}
-						<div class="my-2">
-							<button
-								class="btn btn-outline btn-sm btn-block h-auto py-1 capitalize"
-								on:click={() => handleButtonClick(button)}
-							>
-								{button.content}
-							</button>
-						</div>
-					{/each}
-				</div>
-			{/if}
-		</div>
-		{#if cards.length}
-			<div class="my-4 carousel carousel-center w-screen p-4 space-x-4 bg-neutral">
-				{#each cards as card}
-					<div class="carousel-item w-2/3">
-						<Card
-							imageUrl={card.imageUrl}
-							title={card.title}
-							description={card.description}
-							buttonLabel={card.buttonLabel}
-							on:click={card.onClick}
-						/>
+	<div class="p-3">
+		{#if !!chats.length}
+			<div class="flex flex-col gap-2">
+				{#each chats as chat}
+					{#if typeof chat.content === 'string'}
+						<Message isMe={chat.sender === 'me'} content={chat.content} />
+					{:else}
+						hello
+					{/if}
+				{/each}
+			</div>
+		{/if}
+		{#if loading}
+			<span class="loading loading-dots loading-md my-1 ml-2"></span>
+		{/if}
+		{#if !!buttons.length}
+			<div class="mt-3">
+				{#each buttons as button}
+					<div class="my-2">
+						<button
+							class="btn btn-outline btn-sm btn-block h-auto py-1 capitalize"
+							on:click={() => handleButtonClick(button)}
+						>
+							{button.content}
+						</button>
 					</div>
 				{/each}
 			</div>
 		{/if}
 	</div>
+	{#if cards.length}
+		<div class="my-4 carousel carousel-center w-screen p-4 space-x-4 bg-neutral">
+			{#each cards as card}
+				<div class="carousel-item w-4/5">
+					<Card
+						imageUrl={card.imageUrl}
+						title={card.title}
+						description={card.description}
+						buttonLabel={card.buttonLabel}
+						on:click={card.onClick}
+					/>
+				</div>
+			{/each}
+		</div>
+	{/if}
 	{#if hasInput}
 		<div class="relative m-3">
 			<form>

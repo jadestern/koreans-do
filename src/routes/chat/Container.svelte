@@ -18,9 +18,8 @@
   });
 </script>
 
-<div
-	bind:this={chatWrapper}
-	class="w-screen h-screen flex flex-col justify-end"
->
-	<slot />
+<div class="w-screen h-screen flex flex-col justify-end">
+	<div class="overflow-y-auto" bind:this={chatWrapper}>
+		<slot />
+	</div>
 </div>

@@ -1,9 +1,9 @@
 <script lang="ts">
   import Message from "./Message.svelte";
-  import type { MessageType } from "./types";
+  import type { CardType, MessageType } from "./types";
   import { onMount, } from "svelte";
-  import { BUTTONS, YOU_CHATS } from "./constants";
-  import { find, flow, get, head, last, map } from 'lodash/fp'
+  import { BUTTONS, CONTENTS_URL, THEMES_URL, YOU_CHATS } from "./constants";
+  import { find, flow, get, head, last, map, drop } from 'lodash/fp'
   import { emailValidate, pause } from "./util";
   import Container from "./Container.svelte";
   import Card from "./Card.svelte";
@@ -36,30 +36,11 @@
     )(BUTTONS)]
   }
 
-  $: {
-    const lastChat = flow(last)(chats)
-    switch (lastChat?.afterType) {
-      case 'button':
-        renderButton(lastChat?.afterId)
-        break;
-      case 'message':
-        flow(
-          find({id: lastChat?.afterId}),
-          addChat
-        )(YOU_CHATS)
-        break;
-      case 'input':
-        hasInput = true
-				break;
-	    case 'card':
-        cards = [...cards, 1]
-		    break
-    }
-  }
+
 
   const typing = async (length?: number) => {
     loading = true;
-    await pause(30 * (length ?? 10 + Math.random()));
+    await pause(10 * (length ?? 10 + Math.random()));
     loading = false;
   }
 
@@ -89,80 +70,137 @@
     }
   }
 
+  const getCards = async (url: string, mapPredicate: any) => {
+		const res = await fetch(url)
+		const jsonData = await res.json()
+		const values = jsonData.values as string[]
+		return flow(drop(1), map(mapPredicate))(values) as CardType[]
+	}
 
-  export let data
-  
-  console.log('data', data)
-  
-  // TODO
-  let cards = []
+  let cards: CardType[] = []
+  const showThemeCard = async () => {
+    loading = true;
+    const themes = await getCards(THEMES_URL, (value) => {
+      return {
+        title: value[1],
+	      description: value[2],
+	      buttonLabel: 'Show me more',
+	      onClick: async () => {
+          cards = []
+          chats = [...chats, {
+            id: 0,
+            afterId: -1,
+            afterType: 'card-content',
+            sender: 'me',
+            content: value[1],
+          }]
+	      }
+      }
+    })
+    loading = false;
+    cards = [...themes.map(theme => {
+      return {
+        ...theme,
+	      buttonLabel: 'Show me more'
+      }
+    })]
+  }
 
-  const handleCardClick = (value: string) => {
-	  console.log(value)
-	  // TODO
-	  // value 로 다시 카드 내용 바꾸기
-	  // category 랑 콘텐츠 분할
-	  // 선택하면 메시지 보내기
+  const handleThemeCardClick = async (category: string) => {
+    // Contents Card 보여주기
 
+  }
+
+  const showContentCard = async () => {
+    loading = true
+    const lastChatContent = flow(last, get('content'))(chats)
+    const contents = (await getCards(CONTENTS_URL, (value) => {
+      return {
+        category: value[0],
+        title: value[1],
+        description: value[2],
+        imageUrl: value[3],
+        buttonLabel: 'Show me more',
+        onClick: () => console.log(value[5])
+      }
+    })).filter((content) => {
+      return content.category === lastChatContent
+    })
+    loading = false
+
+    cards = [...contents]
+  }
+
+  $: {
+    const lastChat = flow(last)(chats)
+    switch (lastChat?.afterType) {
+      case 'button':
+        renderButton(lastChat?.afterId)
+        break;
+      case 'message':
+        flow(
+          find({id: lastChat?.afterId}),
+          addChat
+        )(YOU_CHATS)
+        break;
+      case 'input':
+        hasInput = true
+        break;
+      case 'card-theme':
+        showThemeCard()
+        break
+	    case 'card-content':
+        showContentCard()
+		    break
+    }
   }
 </script>
 
 <Container>
-	<div class="p-3">
-	{#if !!chats.length}
-		<div class="flex flex-col gap-2">
-			{#each chats as chat}
-				{#if typeof chat.content === 'string'}
-					<Message isMe={chat.sender === 'me'} content={chat.content} />
-				{:else}
-					hello
-				{/if}
-			{/each}
-		</div>
-	{/if}
-	{#if loading}
-		<span class="loading loading-dots loading-md my-1 ml-2"></span>
-	{/if}
-	{#if !!buttons.length}
-		<div class="mt-3">
-			{#each buttons as button}
-				<div class="my-2">
-					<button
-						class="btn btn-outline btn-sm btn-block h-auto py-1 capitalize"
-						on:click={() => handleButtonClick(button)}
-					>
-						{button.content}
-					</button>
+	<div>
+		<div class="p-3">
+			{#if !!chats.length}
+				<div class="flex flex-col gap-2">
+					{#each chats as chat}
+						{#if typeof chat.content === 'string'}
+							<Message isMe={chat.sender === 'me'} content={chat.content} />
+						{:else}
+							hello
+						{/if}
+					{/each}
 				</div>
-			{/each}
+			{/if}
+			{#if loading}
+				<span class="loading loading-dots loading-md my-1 ml-2"></span>
+			{/if}
+			{#if !!buttons.length}
+				<div class="mt-3">
+					{#each buttons as button}
+						<div class="my-2">
+							<button
+								class="btn btn-outline btn-sm btn-block h-auto py-1 capitalize"
+								on:click={() => handleButtonClick(button)}
+							>
+								{button.content}
+							</button>
+						</div>
+					{/each}
+				</div>
+			{/if}
 		</div>
-	{/if}
 		{#if cards.length}
-			<div class="mt-4 carousel carousel-center max-w-md p-4 space-x-4 bg-neutral">
-				<div class="carousel-item">
-					<Card on:click={() => handleCardClick('value')} />
-				</div>
-				<div class="carousel-item">
-					<Card />
-				</div>
-				<div class="carousel-item">
-					<Card />
-				</div>
-				<div class="carousel-item">
-					<Card />
-				</div>
-				<div class="carousel-item">
-					<Card />
-				</div>
-				<div class="carousel-item">
-					<Card />
-				</div>
-				<div class="carousel-item">
-					<Card />
-				</div>
-				<div class="carousel-item">
-					<Card />
-				</div>
+			<div class="my-4 carousel carousel-center w-screen p-4 space-x-4 bg-neutral">
+				{#each cards as card}
+					<div class="carousel-item w-2/3">
+						<Card
+							imageUrl={card.imageUrl}
+							title={card.title}
+							description={card.description}
+							buttonLabel={card.buttonLabel}
+							on:click={card.onClick}
+						/>
+					</div>
+				{/each}
 			</div>
 		{/if}
 	</div>
@@ -181,5 +219,4 @@
 			<button class="btn btn-primary absolute top-0 right-0 rounded-l-none" on:click={() => sendEmail(email)}>Send</button>
 		</div>
 	{/if}
-
 </Container>

@@ -143,7 +143,7 @@ what the real Korea is like right now.`,
   {
     id: 19,
     afterId: -1,
-    afterType: 'card',
+    afterType: 'card-theme',
     sender: 'you',
     content: `Can you tell me what kind of trip you prefer?`,
   },
@@ -199,3 +199,5 @@ export const BUTTONS: ButtonType[] = [
     chatIds: [13, 14, 15],
   },
 ]
+export const THEMES_URL = 'https://sheets.googleapis.com/v4/spreadsheets/1-fRQjYHA1CMglowuomQks7GpETuSDI2P8QXrn33TQBY/values/%ED%85%8C%EB%A7%88?alt=json&key=AIzaSyBGmfyRxB3e0g3EhakIkgN9WWboHYmFgz0'
+export const CONTENTS_URL = 'https://sheets.googleapis.com/v4/spreadsheets/1-fRQjYHA1CMglowuomQks7GpETuSDI2P8QXrn33TQBY/values/%EC%BD%98%ED%85%90%EC%B8%A0%28%EC%A0%95%EB%A6%AC%29?alt=json&key=AIzaSyBGmfyRxB3e0g3EhakIkgN9WWboHYmFgz0'

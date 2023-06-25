@@ -2,7 +2,7 @@
   import { createEventDispatcher } from "svelte"
 
   const dispatch = createEventDispatcher()
-  export let imageUrl = 'https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg'
+  export let imageUrl = ''
   export let title = 'Shoes!'
   export let description = 'If a dog chews shoes whose shoes does he choose?'
 
@@ -13,8 +13,10 @@
   }
 </script>
 
-<div class="card card-compact w-96 bg-base-100 shadow-xl">
-	<figure><img alt={title} src={imageUrl} /></figure>
+<div class="card {imageUrl ? '': 'card-compact'} bg-base-100 shadow-xl">
+	{#if imageUrl}
+		<figure><img alt={title} src={imageUrl} /></figure>
+	{/if}
 	<div class="card-body">
 		<h2 class="card-title">{title}</h2>
 		<p>{description}</p>

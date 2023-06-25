@@ -5,7 +5,7 @@ export type Chat = {
 export type MessageType = {
   type?: 'message' | 'card'
   afterId?: number
-  afterType?: 'button' | 'message' | 'card' | 'input'
+  afterType?: 'button' | 'message' | 'card-theme' | 'card-content' | 'input'
   sender: 'me' | 'you'
   content: string | HTMLDivElement
 } & Chat
@@ -13,3 +13,18 @@ export type MessageType = {
 export type ButtonType = {
   chatIds: number[]
 } & Chat
+
+
+export type CardType = {
+  category?: string
+  title: string
+  description: string
+  buttonLabel: string
+  onClick: () => void
+}
+
+export type ThemeCardType = CardType
+
+export type ContentCardType = CardType & {
+  imageUrl: string
+}

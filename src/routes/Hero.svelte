@@ -1,7 +1,11 @@
+<script>
+
+</script>
+
 <div class="hero min-h-screen"
-     style="background-image: url(https://media.istockphoto.com/id/1285301614/photo/young-man-arms-outstretched-by-the-sea-at-sunrise-enjoying-freedom-and-life-people-travel.jpg?s=612x612&w=0&k=20&c=0QW6GnkuFNYcPZhy26XVHuTc2avJTK8u6l_1iT0SlZk=);">
+     style="background-image: url(https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20150206_111%2F1423207315964zyyCm_JPEG%2F%25BA%25CE%25BB%25EA_%25C7%25D8%25B5%25BF%25BF%25EB%25B1%25C3%25BB%25E7_1.jpg%3Ftype%3Dm500_500);">
 	<div class="hero-overlay bg-blue-950 bg-opacity-60"></div>
-	<div class="hero-content text-center text-neutral-content">
+	<div class="hero-content text-center text-blue-50">
 		<div class="max-w-sl">
 			<h1 class="mb-5 text-5xl">
 				Welcome to
@@ -11,11 +15,10 @@
 			<p class="mb-6">
 				Do you feel it's difficult to know the real Koreans' latest trend?
 				<br />
-				<br />
 				You can get information from the media, but the trend is a year late.
 			</p>
 			<a href="/chat">
-				<button class="btn btn-secondary">Let's get started!</button>
+				<button class="btn btn-secondary text-gray-50">Let's get started!</button>
 			</a>
 		</div>
 	</div>

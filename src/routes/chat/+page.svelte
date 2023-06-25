@@ -1,6 +1,6 @@
 <script lang="ts">
   import Message from "./Message.svelte";
-  import type { CardType, MessageType } from "./types";
+  import type { CardType, ContentCardType, MessageType, ThemeCardType } from "./types";
   import { onMount, } from "svelte";
   import { BUTTONS, CONTENTS_URL, THEMES_URL, YOU_CHATS } from "./constants";
   import { find, flow, get, head, last, map, drop } from 'lodash/fp'
@@ -70,7 +70,7 @@
     }
   }
 
-  const getCards = async (url: string, mapPredicate: any) => {
+  const getCards = async <T>(url: string, mapPredicate: (value: string[]) => T) => {
 		const res = await fetch(url)
 		const jsonData = await res.json()
 		const values = jsonData.values as string[]
@@ -80,7 +80,7 @@
   let cards: CardType[] = []
   const showThemeCard = async () => {
     loading = true;
-    const themes = await getCards(THEMES_URL, (value) => {
+    const themes = await getCards<ThemeCardType>(THEMES_URL, (value) => {
       return {
         title: value[1],
 	      description: value[2],
@@ -109,7 +109,7 @@
   const showContentCard = async () => {
     loading = true
     const lastChatContent = flow(last, get('content'))(chats)
-    const contents = (await getCards(CONTENTS_URL, (value) => {
+    const contents = (await getCards<ContentCardType>(CONTENTS_URL, (value) => {
       return {
         category: value[0],
         title: value[1],

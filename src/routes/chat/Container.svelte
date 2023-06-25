@@ -13,7 +13,13 @@
 
   afterUpdate(() => {
     if (autoscroll) {
-      chatWrapper.scrollTo(0, chatWrapper.scrollHeight);
+      setTimeout(() => {
+        chatWrapper.scrollTo({
+          top: chatWrapper.scrollHeight,
+          left: 0,
+          behavior: 'smooth'
+        })
+      }, 500)
     }
   });
 </script>

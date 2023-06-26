@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte"
+	import { createEventDispatcher } from "svelte"
 
-  const dispatch = createEventDispatcher()
+	const dispatch = createEventDispatcher()
   export let imageUrl = ''
   export let title = 'Shoes!'
   export let description = 'If a dog chews shoes whose shoes does he choose?'
@@ -13,7 +13,7 @@
   }
 </script>
 
-<div class="card {imageUrl ? '': 'card-compact'} bg-base-100 shadow-xl">
+<div class="card {imageUrl ? '': 'card-compact'} bg-base-100 shadow-xl w-full">
 	{#if imageUrl}
 		<figure><img alt={title} src={imageUrl} /></figure>
 	{/if}

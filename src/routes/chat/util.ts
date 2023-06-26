@@ -7,3 +7,8 @@ export const emailValidate = (value: string) => {
 }
 
 export const customWindow = window as CustomWindow
+
+export const getFetchJson = async (url: string) => {
+  const res = await fetch(url)
+  return res.json()
+}

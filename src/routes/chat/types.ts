@@ -23,12 +23,23 @@ export type CardType = {
   onClick: () => void
 }
 
-export type ThemeCardType = CardType
-
 export type ContentCardType = CardType & {
   imageUrl: string
 }
 
 export type CustomWindow = Window & {
   gtag: Gtag.Gtag,
+}
+
+type FetchData = {
+  title: string
+  description: string
+}
+
+export type ThemeData = FetchData
+
+export type ContentData = FetchData & {
+  category: string
+  imageUrl: string
+  searchLink: string
 }

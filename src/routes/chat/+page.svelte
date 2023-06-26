@@ -1,14 +1,16 @@
 <script lang="ts">
 	import Message from "./Message.svelte";
-	import type { CardType, ContentCardType, MessageType, ThemeCardType } from "./types";
+	import type { CardType, ContentData, MessageType, ThemeData } from "./types";
 	import { onMount, } from "svelte";
-	import { BUTTONS, CONTENTS_URL, THEMES_URL, YOU_CHATS } from "./constants";
-	import { drop, find, flow, get, head, last, map } from 'lodash/fp'
-	import { customWindow, emailValidate, pause } from "./util";
+	import { BUTTONS, YOU_CHATS } from "./constants";
+	import { find, flow, get, head, last, map } from 'lodash/fp'
+	import { customWindow, emailValidate, getFetchJson, pause } from "./util";
 	import Container from "./Container.svelte";
 	import Card from "./Card.svelte";
 
 	let chats: MessageType[] = []
+	$: lastChatContent = flow(last, get('content'))(chats)
+
   let buttons: MessageType[] = []
   let loading = false
   let hasInput = false
@@ -70,35 +72,30 @@
     }
   }
 
-  const getCards = async <T>(url: string, mapPredicate: (value: string[]) => T) => {
-		const res = await fetch(url)
-		const jsonData = await res.json()
-		const values = jsonData.values as string[]
-		return flow(drop(1), map(mapPredicate))(values) as CardType[]
-	}
-
   let cards: CardType[] = []
   const showThemeCard = async () => {
     loading = true;
-    const themes = await getCards<ThemeCardType>(THEMES_URL, (value) => {
-      return {
-        title: value[1],
-	      description: value[2],
-	      buttonLabel: 'Show me more',
-	      onClick: async () => {
-          cards = []
-          chats = [...chats, {
-            id: 0,
-            afterId: -1,
-            afterType: 'card-content',
-            sender: 'me',
-            content: value[1],
-          }]
-	      }
-      }
-    })
+		const result: ThemeData[] = await getFetchJson('/chat/themes')
+
+	  const themes = result.map((theme) => {
+			return {
+				...theme,
+				buttonLabel: 'Show me more',
+				onClick: async () => {
+					cards = []
+					chats = [...chats, {
+						id: 0,
+						afterId: -1,
+						afterType: 'card-content',
+						sender: 'me',
+						content: theme.title,
+					}]
+				}
+			}
+	  })
     loading = false;
-    cards = [...themes.map(theme => {
+
+		cards = [...themes.map(theme => {
       return {
         ...theme,
 	      buttonLabel: 'Show me more'
@@ -106,31 +103,27 @@
     })]
   }
 
+
   const showContentCard = async () => {
     loading = true
-    const lastChatContent = flow(last, get('content'))(chats)
-    const contents = (await getCards<ContentCardType>(CONTENTS_URL, (value) => {
-      return {
-        category: value[0],
-        title: value[1],
-        description: value[2],
-        imageUrl: value[3],
-        buttonLabel: 'Show me more',
-        onClick: async () => {
-          window.open(value[4], "_blank");
-          await typing()
-          chats = [...chats, {
-            id: 21,
-            afterId: 22,
-            afterType: 'message',
-            sender: 'you',
-            content: `Excellent Choice!`,
-          }]
-        }
-      }
-    })).filter((content) => {
-      return content.category === lastChatContent
-    })
+	  const result: ContentData[] = await getFetchJson(`/chat/contents?category=${lastChatContent}`)
+
+	  const contents = result.map((content) => {
+			return {
+				...content,
+				buttonLabel: 'Show me more',
+				onClick: async () => {
+					window.open(content.searchLink, "_blank");
+					chats = [...chats, {
+						id: 21,
+						afterId: 22,
+						afterType: 'message',
+						sender: 'you',
+						content: `Excellent Choice!`,
+					}]
+				}
+			}
+	  })
     loading = false
 
     cards = [...contents]

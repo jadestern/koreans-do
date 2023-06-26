@@ -1,14 +1,14 @@
 <script lang="ts">
-  import Message from "./Message.svelte";
-  import type { CardType, ContentCardType, MessageType, ThemeCardType } from "./types";
-  import { onMount, } from "svelte";
-  import { BUTTONS, CONTENTS_URL, THEMES_URL, YOU_CHATS } from "./constants";
-  import { find, flow, get, head, last, map, drop } from 'lodash/fp'
-  import { emailValidate, pause } from "./util";
-  import Container from "./Container.svelte";
-  import Card from "./Card.svelte";
+	import Message from "./Message.svelte";
+	import type { CardType, ContentCardType, MessageType, ThemeCardType } from "./types";
+	import { onMount, } from "svelte";
+	import { BUTTONS, CONTENTS_URL, THEMES_URL, YOU_CHATS } from "./constants";
+	import { drop, find, flow, get, head, last, map } from 'lodash/fp'
+	import { customWindow, emailValidate, pause } from "./util";
+	import Container from "./Container.svelte";
+	import Card from "./Card.svelte";
 
-  let chats: MessageType[] = []
+	let chats: MessageType[] = []
   let buttons: MessageType[] = []
   let loading = false
   let hasInput = false
@@ -136,6 +136,13 @@
     cards = [...contents]
   }
 
+	const gtagClickAnswer = (answer: string) => {
+		customWindow.gtag('event', 'click_answer', {
+			question: flow(last, get('content'))(chats),
+			answer,
+		})
+	}
+
   $: {
     const lastChat = flow(last)(chats)
     switch (lastChat?.afterType) {
@@ -183,7 +190,10 @@
 					<div class="my-2">
 						<button
 							class="btn btn-outline btn-sm btn-block h-auto py-1 capitalize"
-							on:click={() => handleButtonClick(button)}
+							on:click={() => {
+								gtagClickAnswer(button.content)
+								handleButtonClick(button)
+							}}
 						>
 							{button.content}
 						</button>

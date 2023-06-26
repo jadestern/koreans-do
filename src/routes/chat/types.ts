@@ -28,3 +28,7 @@ export type ThemeCardType = CardType
 export type ContentCardType = CardType & {
   imageUrl: string
 }
+
+export type CustomWindow = Window & {
+  gtag: Gtag.Gtag,
+}

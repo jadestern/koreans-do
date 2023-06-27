@@ -16,6 +16,7 @@ export type ButtonType = {
 
 
 export type CardType = {
+  isContent?: boolean
   category?: string
   title: string
   description: string

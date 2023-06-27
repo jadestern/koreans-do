@@ -107,6 +107,7 @@
 	  const contents = result.map((content) => {
 			return {
 				...content,
+				isContent: true,
 				buttonLabel: 'Show me more',
 				onClick: async () => {
           searchLink = content.searchLink
@@ -190,10 +191,7 @@
 			{#each cards as card}
 				<div class="carousel-item w-4/5">
 					<Card
-						imageUrl={card.imageUrl}
-						title={card.title}
-						description={card.description}
-						buttonLabel={card.buttonLabel}
+						{...card}
 						on:click={card.onClick}
 					/>
 				</div>

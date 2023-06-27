@@ -2,6 +2,8 @@
 	import { createEventDispatcher } from "svelte"
 
 	const dispatch = createEventDispatcher()
+
+	export let isContent = false
   export let imageUrl = ''
   export let title = 'Shoes!'
   export let description = 'If a dog chews shoes whose shoes does he choose?'
@@ -21,7 +23,22 @@
 		<h2 class="card-title">{title}</h2>
 		<p>{description}</p>
 		<div class="card-actions justify-end">
-			<button class="btn btn-primary" on:click={onClick}>{buttonLabel}</button>
+			{#if isContent}
+				<button
+					data-theme={title}
+					class="btn btn-primary"
+					on:click={onClick}
+				>
+					{buttonLabel}
+				</button>
+				{:else}
+				<button
+					class="btn btn-primary"
+					on:click={onClick}
+				>
+					{buttonLabel}
+				</button>
+			{/if}
 		</div>
 	</div>
 </div>

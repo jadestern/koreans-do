@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { customWindow } from "./util";
+
   export let link
 
   let email = ''
@@ -6,7 +8,10 @@
   const sendEmail = () => {
     // email validate 를 의도적으로 안함
     window.open(link, "_blank");
-    console.log('email', email) // TODO: GA 로
+    customWindow.gtag('event', 'followup_email', {
+      address: email,
+	    question: 'modal'
+    })
   }
 
   const handleKeydown = (event) => {

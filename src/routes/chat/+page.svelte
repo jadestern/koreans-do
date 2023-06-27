@@ -55,6 +55,12 @@
   let email = ''
   const sendEmail = (content: string) => {
     hasInput = false
+
+	  customWindow.gtag('event', 'followup_email', {
+			address: content,
+		  question: lastChatContent,
+	  })
+
     chats = [...chats, {
       id: 0,
       afterId: emailValidate(content) ? 23 : 24,
@@ -82,6 +88,10 @@
 				...theme,
 				buttonLabel: 'This is it',
 				onClick: async () => {
+          customWindow.gtag('event', 'click_theme', {
+						theme_title: theme.title,
+						theme_desc: theme.description,
+					})
 					cards = []
 					chats = [...chats, {
 						id: 0,
@@ -110,6 +120,11 @@
 				isContent: true,
 				buttonLabel: 'Show me more',
 				onClick: async () => {
+          customWindow.gtag('event', 'click_content', {
+            theme_title: lastChatContent,
+            content_title: content.title,
+            content_desc: content.description,
+          })
           searchLink = content.searchLink
           customWindow.emailModal.showModal()
 				}
@@ -191,7 +206,11 @@
 			{#each cards as card}
 				<div class="carousel-item w-4/5">
 					<Card
-						{...card}
+						isContent={card.isContent}
+						imageUrl={card.imageUrl}
+						title={card.title}
+						description={card.description}
+						buttonLabel={card.buttonLabel}
 						on:click={card.onClick}
 					/>
 				</div>

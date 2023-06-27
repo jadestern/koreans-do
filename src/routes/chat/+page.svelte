@@ -7,6 +7,7 @@
 	import { customWindow, emailValidate, getFetchJson, pause } from "./util";
 	import Container from "./Container.svelte";
 	import Card from "./Card.svelte";
+  import Modal from "./Modal.svelte";
 
 	let chats: MessageType[] = []
 	$: lastChatContent = flow(last, get('content'))(chats)
@@ -104,6 +105,7 @@
   }
 
 
+  let searchLink = ''
   const showContentCard = async () => {
     loading = true
 	  const result: ContentData[] = await getFetchJson(`/chat/contents?category=${lastChatContent}`)
@@ -113,14 +115,8 @@
 				...content,
 				buttonLabel: 'Show me more',
 				onClick: async () => {
-					window.open(content.searchLink, "_blank");
-					chats = [...chats, {
-						id: 21,
-						afterId: 22,
-						afterType: 'message',
-						sender: 'you',
-						content: `Excellent Choice!`,
-					}]
+          searchLink = content.searchLink
+          customWindow.emailModal.showModal()
 				}
 			}
 	  })
@@ -226,3 +222,4 @@
 		</div>
 	{/if}
 </Container>
+<Modal link={searchLink} />

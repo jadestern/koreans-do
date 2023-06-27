@@ -23,12 +23,11 @@ export type CardType = {
   onClick: () => void
 }
 
-export type ContentCardType = CardType & {
-  imageUrl: string
-}
-
 export type CustomWindow = Window & {
   gtag: Gtag.Gtag,
+  emailModal: {
+    showModal: () => void
+  }
 }
 
 type FetchData = {

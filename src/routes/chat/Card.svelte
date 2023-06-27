@@ -15,7 +15,7 @@
 
 <div class="card {imageUrl ? '': 'card-compact'} bg-base-100 shadow-xl w-full">
 	{#if imageUrl}
-		<figure><img alt={title} src={imageUrl} /></figure>
+		<figure><img alt={title} src={imageUrl} class="aspect-video object-cover" /></figure>
 	{/if}
 	<div class="card-body">
 		<h2 class="card-title">{title}</h2>

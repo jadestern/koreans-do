@@ -80,7 +80,7 @@
 	  const themes = result.map((theme) => {
 			return {
 				...theme,
-				buttonLabel: 'Show me more',
+				buttonLabel: 'This is it',
 				onClick: async () => {
 					cards = []
 					chats = [...chats, {
@@ -95,12 +95,7 @@
 	  })
     loading = false;
 
-		cards = [...themes.map(theme => {
-      return {
-        ...theme,
-	      buttonLabel: 'Show me more'
-      }
-    })]
+		cards = [...themes]
   }
 
 

@@ -27,7 +27,6 @@
   }
 
   const renderButton = async (lastChatAfterId: number) => {
-    await pause(900 * (1 + Math.random()));
     buttons = [...buttons, ...flow(
       find((button) => button.id === lastChatAfterId),
       get('chatIds'),

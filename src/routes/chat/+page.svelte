@@ -212,6 +212,7 @@
 						title={card.title}
 						description={card.description}
 						buttonLabel={card.buttonLabel}
+						theme={card.theme}
 						on:click={card.onClick}
 					/>
 				</div>

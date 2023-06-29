@@ -88,10 +88,6 @@
 				...theme,
 				buttonLabel: 'This is it',
 				onClick: async () => {
-          customWindow.gtag('event', 'click_theme', {
-						theme_title: theme.title,
-						theme_desc: theme.description,
-					})
 					cards = []
 					chats = [...chats, {
 						id: 0,
@@ -110,7 +106,6 @@
 
 
   let searchLink = ''
-	let isModalOpen = false
   const showContentCard = async () => {
     loading = true
 	  const result: ContentData[] = await getFetchJson(`/chat/contents?category=${encodeURIComponent(lastChatContent)}`)
@@ -122,11 +117,6 @@
 				buttonLabel: 'Show me more',
         theme: lastChatContent,
 				onClick: async () => {
-          customWindow.gtag('event', 'click_content', {
-            theme_title: lastChatContent,
-            content_title: content.title,
-            content_desc: content.description,
-          })
           searchLink = content.searchLink
 					if(localStorage.getItem('email')) {
             window.open(content.searchLink, "_blank");

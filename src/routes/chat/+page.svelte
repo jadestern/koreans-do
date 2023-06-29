@@ -110,6 +110,7 @@
 
 
   let searchLink = ''
+	let isModalOpen = false
   const showContentCard = async () => {
     loading = true
 	  const result: ContentData[] = await getFetchJson(`/chat/contents?category=${lastChatContent}`)
@@ -127,7 +128,11 @@
             content_desc: content.description,
           })
           searchLink = content.searchLink
-          customWindow.emailModal.showModal()
+					if(localStorage.getItem('email')) {
+            window.open(content.searchLink, "_blank");
+          } else {
+            customWindow.emailModal.showModal()
+          }
 				}
 			}
 	  })

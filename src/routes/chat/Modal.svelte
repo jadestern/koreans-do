@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { customWindow } from "./util";
+  import { customWindow, emailValidate } from "./util";
 
   export let link
 
@@ -12,6 +12,10 @@
       address: email,
 	    question: 'modal'
     })
+
+	  if(emailValidate(email)) {
+      localStorage.setItem('email', email)
+    }
   }
 
   const handleKeydown = (event) => {

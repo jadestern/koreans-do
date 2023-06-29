@@ -113,7 +113,7 @@
 	let isModalOpen = false
   const showContentCard = async () => {
     loading = true
-	  const result: ContentData[] = await getFetchJson(`/chat/contents?category=${lastChatContent}`)
+	  const result: ContentData[] = await getFetchJson(`/chat/contents?category=${encodeURIComponent(lastChatContent)}`)
 
 	  const contents = result.map((content) => {
 			return {

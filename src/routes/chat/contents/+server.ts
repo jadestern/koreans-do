@@ -26,7 +26,7 @@ export async function GET(event: LoadEvent) {
 				searchLink: value[4],
 			}
 		}),
-		_.filter({category}),
+		_.filter({category: decodeURIComponent(category || '')}),
 		json
 	)(jsonData)
 }

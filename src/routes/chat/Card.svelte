@@ -8,6 +8,8 @@
   export let title = 'Shoes!'
   export let description = 'If a dog chews shoes whose shoes does he choose?'
 
+	export let theme = ''
+
   export let buttonLabel = 'Buy Now'
 
   const onClick = () => {
@@ -25,7 +27,7 @@
 		<div class="card-actions justify-end">
 			{#if isContent}
 				<button
-					data-theme={title}
+					data-theme={theme}
 					class="btn btn-primary"
 					on:click={onClick}
 				>

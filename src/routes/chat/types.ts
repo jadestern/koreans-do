@@ -21,6 +21,7 @@ export type CardType = {
   title: string
   description: string
   buttonLabel: string
+  theme?: string
   onClick: () => void
 }
 

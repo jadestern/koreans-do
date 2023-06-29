@@ -119,6 +119,7 @@
 				...content,
 				isContent: true,
 				buttonLabel: 'Show me more',
+        theme: lastChatContent,
 				onClick: async () => {
           customWindow.gtag('event', 'click_content', {
             theme_title: lastChatContent,

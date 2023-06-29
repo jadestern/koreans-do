@@ -1,10 +1,11 @@
 import { json } from '@sveltejs/kit';
 import { createRequire } from 'module'
+import { GOOGLE_API_KEY } from "$env/static/private";
 
 const require = createRequire(import.meta.url)
 const _ = require('lodash/fp')
 
-const THEMES_URL = `https://sheets.googleapis.com/v4/spreadsheets/1-fRQjYHA1CMglowuomQks7GpETuSDI2P8QXrn33TQBY/values/%ED%85%8C%EB%A7%88?alt=json&key=${process.env.GOOGLE_API_KEY}`
+const THEMES_URL = `https://sheets.googleapis.com/v4/spreadsheets/1-fRQjYHA1CMglowuomQks7GpETuSDI2P8QXrn33TQBY/values/%ED%85%8C%EB%A7%88?alt=json&key=${process.env.GOOGLE_API_KEY || GOOGLE_API_KEY}`
 
 export async function GET() {
 	const res = await fetch(THEMES_URL)

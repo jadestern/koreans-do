@@ -10,13 +10,12 @@
 			<h1 class="mb-5 text-5xl">
 				Welcome to
 				<br />
-				<strong>What Koreans Really Do</strong>
-				.
+				<strong>What Koreans Really Do.</strong>
 			</h1>
 			<p class="mb-6">
-				Do you feel it's difficult to know the real Koreans' latest trend?
+				Don't you think traveling is about experiencing the locals' life?
 				<br />
-				You can get information from the media, but the trend is a year late.
+				If you agree with me, click the link below and let's talk!
 			</p>
 			<a href="/chat">
 				<button class="btn btn-secondary text-gray-50">Let's get started!</button>

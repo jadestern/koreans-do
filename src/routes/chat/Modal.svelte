@@ -9,10 +9,11 @@
     // email validate 를 의도적으로 안함
     window.open(link, "_blank");
 	  customWindow.dataLayer.push({
-		  'followup_email': {
-			  address: email,
-			  question: 'modal'
-		  }
+		  'event': 'followup_email',
+		  'properties': {
+			  'email': email,
+			  'question': 'modal'
+		  },
 	  })
 
 	  if(emailValidate(email)) {

@@ -57,9 +57,10 @@
     hasInput = false
 
 	  customWindow.dataLayer.push({
-		  'followup_email': {
-			  address: content,
+		  'event': 'followup_email',
+		  'properties': {
 			  question: lastChatContent,
+			  answer: content,
 		  }
 	  })
 
@@ -135,7 +136,8 @@
 
 	const dataLayerPushAnswer = (answer: string) => {
 		customWindow.dataLayer.push({
-			'click_answer': {
+			'event': 'click_answer',
+			'properties': {
 				question: flow(last, get('content'))(chats),
 				answer,
 			}

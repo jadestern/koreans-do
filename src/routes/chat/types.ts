@@ -26,10 +26,10 @@ export type CardType = {
 }
 
 export type CustomWindow = Window & {
-  gtag: Gtag.Gtag,
   emailModal: {
     showModal: () => void
   }
+  dataLayer: any[]
 }
 
 type FetchData = {

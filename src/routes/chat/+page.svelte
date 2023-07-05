@@ -7,7 +7,7 @@
 	import { customWindow, emailValidate, getFetchJson, pause } from "./util";
 	import Container from "./Container.svelte";
 	import Card from "./Card.svelte";
-  import Modal from "./Modal.svelte";
+	import Modal from "./Modal.svelte";
 
 	let chats: MessageType[] = []
 	$: lastChatContent = flow(last, get('content'))(chats)
@@ -56,9 +56,12 @@
   const sendEmail = (content: string) => {
     hasInput = false
 
-	  customWindow.gtag('event', 'followup_email', {
-			address: content,
-		  question: lastChatContent,
+	  customWindow.dataLayer.push({
+		  event: 'followup_email',
+		  properties: {
+			  question: lastChatContent,
+			  address: content,
+		  }
 	  })
 
     chats = [...chats, {
@@ -131,10 +134,13 @@
     cards = [...contents]
   }
 
-	const gtagClickAnswer = (answer: string) => {
-		customWindow.gtag('event', 'click_answer', {
-			question: flow(last, get('content'))(chats),
-			answer,
+	const dataLayerPushAnswer = (answer: string) => {
+		customWindow.dataLayer.push({
+			event: 'click_answer',
+			properties: {
+				question: flow(last, get('content'))(chats),
+				answer,
+			}
 		})
 	}
 
@@ -198,7 +204,7 @@
 						<button
 							class="btn btn-outline btn-sm btn-block h-auto py-1 capitalize"
 							on:click={() => {
-								gtagClickAnswer(button.content)
+								dataLayerPushAnswer(button.content)
 								handleButtonClick(button)
 							}}
 						>

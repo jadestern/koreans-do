@@ -1,17 +1,20 @@
 <script lang="ts">
-  import { customWindow, emailValidate } from "./util";
+	import { customWindow, emailValidate } from "./util";
 
-  export let link
+	export let link
 
   let email = ''
 
   const sendEmail = () => {
     // email validate 를 의도적으로 안함
     window.open(link, "_blank");
-    customWindow.gtag('event', 'followup_email', {
-      address: email,
-	    question: 'modal'
-    })
+	  customWindow.dataLayer.push({
+		  event: 'followup_email',
+		  properties: {
+			  address: email,
+			  question: 'modal'
+		  },
+	  })
 
 	  if(emailValidate(email)) {
       localStorage.setItem('email', email)
@@ -27,8 +30,8 @@
   }
 </script>
 
-<dialog id="emailModal" class="modal">
-	<form method="dialog" class="modal-box">
+<dialog class="modal" id="emailModal">
+	<form class="modal-box" method="dialog">
 		<button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
 		<h3 class="font-bold text-lg">Excellent Choice!</h3>
 		<p class="py-4">
@@ -39,11 +42,11 @@
 		<div class="relative">
 			<input
 				bind:value={email}
-				type="email"
-				placeholder="Type here"
 				class="input input-primary w-full pr-16"
 				on:keydown={handleKeydown}
+				placeholder="Type here"
 				required
+				type="email"
 			/>
 			<button class="btn btn-primary absolute top-0 right-0 rounded-l-none" on:click={sendEmail}>Send</button>
 		</div>

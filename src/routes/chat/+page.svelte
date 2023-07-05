@@ -3,7 +3,7 @@
 	import type { CardType, ContentData, MessageType, ThemeData } from "./types";
 	import { onMount, } from "svelte";
 	import { BUTTONS, YOU_CHATS } from "./constants";
-	import { find, flow, get, head, last, map } from 'lodash/fp'
+	import { find, flow, get, head, last, map, dropRight, concat } from 'lodash/fp'
 	import { customWindow, emailValidate, getFetchJson, pause } from "./util";
 	import Container from "./Container.svelte";
 	import Card from "./Card.svelte";
@@ -159,6 +159,18 @@
 	    case 'card-content':
         showContentCard()
 		    break
+    }
+  }
+
+  $: {
+    if(localStorage.getItem('email') && flow(last)(chats)?.id === 12) {
+      const deletedChat = flow(dropRight(1))(chats)
+
+	    chats = [...deletedChat, {
+        sender: 'you',
+        content: 'Ok, If you change your mind, Just refresh the page.'
+	    }]
+      hasInput = false
     }
   }
 </script>

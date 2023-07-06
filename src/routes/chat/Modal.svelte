@@ -35,9 +35,9 @@
 		<button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
 		<h3 class="font-bold text-lg">Excellent Choice!</h3>
 		<p class="py-4">
-			If you leave your e-mail address,
-			I will send you the detailed information about this.
-			You can get it in a day.
+			Please leave an e-mail for more information.
+			<br>
+			Then you will directly get to the content.
 		</p>
 		<div class="relative">
 			<input
